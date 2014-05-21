@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :posts
+
   #
-  root 'application#index'
+  root 'application#splash'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    self.token
+    self.id.to_s
   end
 
   private

@@ -42,3 +42,34 @@ Controller - going to have just one path. Need an application controller
 for site-wide auth stuff and sessions. Index only for now.
 
 Views - index.html. Just a success message, later features will fill this in.
+
+-------
+
+Got automagic sign-up working. Can't set email/password yet, should
+that be next? It's that or adding links to display. Got side-tracked on
+mapping session tokens to human readable words. Will come back later for
+it at a later stage.
+
+--------
+
+Next up, posts. I might want to constrain this down to "images or text".
+Maybe want links. Links will make things funky for any specialized
+load-content-of-one-post-and-show-it UI. Actually, I think I want links.
+
+Probably want to classify these into text, image, and link posts.
+Scratch that. I want to add a list (hash?) of classifications, and parse from the
+submission some default classifications. The general idea is being able
+to browse all images, or all cat images, or all cat, or all text posts about relationships
+
+So the basic idea for links is full CRUD. Attributes:
+  target - optional string. URL for the content in question. Self posts have
+    a null target - asking for the target will default back to the location
+  location - uniq string. URL for the post itself.
+    actually, don't store in database, because that's silly and we're already
+    storing the post ID. Instead, route from url strings to post numbers
+    in the show method
+  content - optional text. Body for self post.
+  user - references. -> User model.
+  *title  - mandatory string - title to display in link.
+
+  Later feature slices will add categories, voting, and comments.
