@@ -27,3 +27,18 @@ Next, make sign-up work. It's basically just adding an email and password
 to a user account. Or some way of identifying yourself - it actually isn't
 really that important at this point. Basically anything that you can set
 as something only you can use to get to your account.
+
+
+--------------------------
+
+Model - class User, with indexed token, email, password_digest (for now).
+DB does not require any of these. This is fine - if they don't have it,
+users are only unable to reach the accounts. I still want them for keeping
+track of what posts people like.
+
+Router - just the root page for now, make the site-wide stuff work first
+
+Controller - going to have just one path. Need an application controller
+for site-wide auth stuff and sessions. Index only for now.
+
+Views - index.html. Just a success message, later features will fill this in.
