@@ -1,0 +1,29 @@
+First feature: start with sessions. User should get a session cookie
+when visiting the index page. Get it to display an identifier at the top.
+
+Get the DB to persist the no-name/password sessions. Test this by opening
+up an incognito window - should make a new anonymous account.
+
+There's a design decision here - keep anon account info inside a cookie, or
+persist it to a database. I think I need to push it all to the client-side
+until they want it persisted under a name/password combination. I mean,
+way of accessing it other than from the cookie, there's no goddamn point
+to saving it server-side. Wait, never mind, we want anon accounts to have
+full functionality, which means upvotes/downvotes/views, which means
+persisting who likes what to the DB. Save that shit - it's useful.
+
+So, the design choice is figuring out where and when to trim un-needed data.
+Maybe something like no votes on recently viewed content and no recent access.
+
+--
+
+The identifier is just some function of the user ID. Some way of mapping
+from number to strings - not sure if I want a series of words
+(think 'correct horse battery staple'). Scratch that, definitely want
+a series of words like that.
+
+
+Next, make sign-up work. It's basically just adding an email and password
+to a user account. Or some way of identifying yourself - it actually isn't
+really that important at this point. Basically anything that you can set
+as something only you can use to get to your account.
