@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
-
+    @post = Post.find(params[:id])
   end
 
   def edit
@@ -26,5 +26,11 @@ class PostsController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def link_params
+    params.require(:link).permit(:user_id, :title, :target, :content)
   end
 end
