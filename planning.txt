@@ -73,3 +73,8 @@ So the basic idea for links is full CRUD. Attributes:
   *title  - mandatory string - title to display in link.
 
   Later feature slices will add categories, voting, and comments.
+
+  ## REWORK POST MODEL-LEVEL VARIABLES
+    target => url
+    content => body
+    DELETE location

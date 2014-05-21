@@ -3,9 +3,8 @@
 # Table name: posts
 #
 #  id         :integer          not null, primary key
-#  target     :string(255)
-#  location   :string(255)
-#  content    :text
+#  url        :string(255)
+#  body       :text
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
