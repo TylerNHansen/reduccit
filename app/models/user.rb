@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   def self.find_or_create(token)
     return User.create unless token
-    User.find_by_token(token)
+    User.find_by_token(token) || User.create
   end
 
   def token!

@@ -1,5 +1,7 @@
-Redditclone.Collections.Posts = Backbone.Collection.extend({
+ Redditclone.Collections.Posts = Backbone.Collection.extend({
 
-  model: Redditclone.Models.Post
+  model: Redditclone.Models.Post,
+
+  url: "http://reddit.com/r/all/top.json",
 
 });

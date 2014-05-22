@@ -2,4 +2,6 @@
 
 2. Initialize this project for backbone and bootstrap.
 
-3. Push things to heroku
+3. Have Backbone grab a reddit listing through the no-auth API (url.json)
+
+End: Push things to heroku
