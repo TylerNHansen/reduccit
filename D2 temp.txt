@@ -1,0 +1,5 @@
+1. Fix the has-secure-password
+
+2. Initialize this project for backbone and bootstrap.
+
+3. Push things to heroku
