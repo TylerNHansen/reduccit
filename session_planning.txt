@@ -1,0 +1,46 @@
+Funky structure things for users/sessions
+
+currently we have some magical controller action-at-a-distance from inside
+application.html.erb - it asks for the current user, which finds-or-creates
+a session cookie, which isn't how we want to do this kind of thing.
+
+So, let's initialize the @current_user before any controller does anything
+
+Next up, we want to be able to do certain things:
+
+1. Give the current account a new email/password combination.
+2. Stop using the current account, and use a new account instead.
+  forgetting the current session token should be plenty to do that
+3. Enter an email/password and switch to that account
+
+I need to name these in a way that maps to traditional account management words.
+1. is something like "set [email, password]"
+2. is something like "use new account"
+3. is something like "sign in"
+
+Sign up is strangely missing in this model.
+
+changing email and password might need confirmation of current credentials.
+That's patchable though - the simple form to change them is a baseline
+for the anonymous case. It's an extra feature for later.
+
+use new account is straightforward - just throw away the session token.
+
+sign in is:
+  1. Try to find the email/pass combination
+    if success, make a new session token and set yours/account's tokens to it
+    if failure, bring up failure page
+      failure page can have helpful things like "email me a password reset link"
+
+
+On second thought, I definitely want this to be a reddit *wrapper* and not
+a reddit *clone*. That is, use reddit's oauth and API heavily to do cool
+things.
+
+
+So the accounts thing is use 1 of 2 options:
+1. Use your reddit login. If you have a wrapper account, uses it
+to sign into wrapper. If you don't, goes through the linking process.
+
+2. Lurk. Gives you a temporary wrapper account for holding onto preferences,
+likes, etc.

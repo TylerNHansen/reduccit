@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :form_auth_html, :update_method_html
 
+  # # guarantee having a user
+  # before_action :current_user
+
   def splash
 
   end
@@ -23,6 +26,7 @@ class ApplicationController < ActionController::Base
   def update_method_html
     "<input type='hidden' name='_method' value='patch'>".html_safe
   end
+
 
 
 end

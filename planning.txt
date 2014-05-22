@@ -78,3 +78,10 @@ So the basic idea for links is full CRUD. Attributes:
     target => url
     content => body
     DELETE location
+
+So, missing CRUD is edit/update for posts. I'm almost fine with that,
+but leaving the less exciting tasks for later means I wind up with a
+gigantic pile of unpleasant tasks. Don't do that, it's silly.
+
+Next up is sign in and sign up. This is going to be a bit weird since
+I am doing things weirdly.
