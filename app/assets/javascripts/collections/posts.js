@@ -2,6 +2,6 @@
 
   model: Redditclone.Models.Post,
 
-  url: "http://reddit.com/r/all/top.json",
+  url: "/api/reddit/test",
 
 });

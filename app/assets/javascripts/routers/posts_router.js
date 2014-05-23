@@ -5,6 +5,6 @@ Redditclone.Routers.Posts = Backbone.Router.extend({
   },
 
   index: function () {
-    alert('welcome to webapp')
+
   },
 });

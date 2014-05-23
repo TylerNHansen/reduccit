@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   #
   root 'application#splash'
 
+  get 'api/reddit/test' => 'test#test'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

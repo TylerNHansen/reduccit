@@ -3,5 +3,19 @@
 2. Initialize this project for backbone and bootstrap.
 
 3. Have Backbone grab a reddit listing through the no-auth API (url.json)
+  Cross-site javascript is bad and not allowed. Instead have routes for
+  the client-side javascript to ask the server about things, then have
+  the server request things and serve it to the client.
+
+    Data can get to the backbone JS. I need a parsing strategy to turn
+    the received data into useful visual stuff.
+
+    I want to overwrite backbone's `parse`, so that I get a collection
+    of backbone models that are individually manipulatable.
+
+    Alternatively, do I even need backbone?
+
+    Also, where should I do parsing? Do I pass along the raw reddit result,
+    or should I trim it down to relevant information on the server side?
 
 End: Push things to heroku
