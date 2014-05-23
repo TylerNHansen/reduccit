@@ -9,7 +9,7 @@ class TestController < ApplicationController
 
     raw_result = HTTParty.get('http://www.reddit.com/r/anonyreddit/.json')
     results = raw_result['data']['children'].map do |entry|
-      entry['data'].slice('url', 'name')
+      entry['data'].slice('url', 'name', 'title')
     end
     render json: results
   end
