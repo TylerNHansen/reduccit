@@ -30,7 +30,7 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
   },
 
   checkScroll: function () {
-    var buffer = 100; // pixels
+    var buffer = 300; // pixels
     if(!this.loading && ( $(window).scrollTop() === 0 || $(window).scrollTop() + $(window).height() + buffer > $(document).height()) ){
       this.loading = true;
       this.fetchMoreLinks();

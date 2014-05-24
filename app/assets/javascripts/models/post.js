@@ -5,8 +5,8 @@ Redditclone.Models.Post = Backbone.Model.extend({
 
     var postData = _(resp.data).pick('url', 'title', 'domain');
 
-    if(postData.domain === 'imgur.com'){
+    // if(postData.domain === 'imgur.com'){
       return postData;
-    }
+    // }
   }
 });
