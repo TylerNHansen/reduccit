@@ -6,19 +6,26 @@
 
   sync: function(method, model, options) {
     options.dataType = 'jsonp';
-    options.url='http://reddit.com/r/anonyreddit.json?jsonp=?';
+    options.url=this.morePostsUrl();
 
     return Backbone.sync.apply(this, arguments);
   },
 
+  morePostsUrl: function () {
+    return "http://reddit.com/r/ftlgame.json?jsonp=?&after=" + this.after;
+  },
 
-  // convert response from server to a list of models to add to collection
+  after: "",
+
   parse: function (resp) {
+    if(resp.data.after){
+      // update URL for getting more posts with the pagination link
+      this.after = resp.data.after
+    }
     var children = [];
     if(resp.data.children){
       _(resp.data.children).each(function (childData) {
         children.push(new Redditclone.Models.Post(childData, {parse: true}));
-        // need to build an object to return?
       })
       delete resp.data.children
     }

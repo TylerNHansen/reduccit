@@ -1,0 +1,14 @@
+reddit.com/r/%subreddit/comments.json
+  most recent comments to subreddit
+reddit.com/r/%subreddit.json
+  most recent posts to subreddit
+GET /comments/article/%id
+  with the 'id' attribute from a comment, grabs the comment tree.
+    give it 'context' for how many parents.
+    give it 'limit' for how many total posts to show.
+
+
+JSONP
+  test.models[0].get('data').children[0].data['url']
+  posts.js overrides sync()
+  need to override parse to get array of usable objects
