@@ -10,21 +10,22 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
   },
 
   template: JST['posts/index'],
+  headline: JST['posts/headline'],
 
   events: {
     'scroll .content': 'checkScroll'
   },
 
   render: function () {
-    var content = this.template({posts: this.collection});
-    this.$el.html(content);
-    var that = this;
+    var content = "<div class=\"posts\">"
     // _(this.collection.last(100)).each(function (post) {
     // above breaks scrolling
+    var that = this;
     this.collection.each(function (post){
-      var view = new Redditclone.Views.PostsShow({model: post});
-      that.$el.append(view.render().$el);
-    })
+      content += that.headline({post: post});
+    });
+    content += "</div>"
+    this.$el.html(content);
     return this;
   },
 

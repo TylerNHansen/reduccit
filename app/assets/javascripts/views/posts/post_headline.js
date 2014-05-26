@@ -1,6 +1,6 @@
-Redditclone.Views.PostsShow = Backbone.View.extend({
+Redditclone.Views.PostHeadline = Backbone.View.extend({
 
-  template: JST['posts/show'],
+  template: JST['posts/headline'],
 
   render: function () {
     var content = this.template({post: this.model});
