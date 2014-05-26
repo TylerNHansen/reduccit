@@ -19,16 +19,16 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
   renderCount: 0,
 
   render: function () {
-    console.log(this.renderCount++);
-    var content = "<div class=\"posts\">"
-    // _(this.collection.last(100)).each(function (post) {
-    // above breaks scrolling
+    var content = this.template();
+    var posts = [];
+    this.$el.html(content);
     var that = this;
     this.collection.each(function (post){
-      content += that.headline({post: post});
+      var postHeadline = new Redditclone.Views.PostHeadline({model: post});
+      posts.push(postHeadline);
+      that.$el.append(postHeadline.render().$el);
     });
-    content += "</div>"
-    this.$el.html(content);
+
     return this;
   },
 
