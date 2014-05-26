@@ -12,7 +12,7 @@
   },
 
   morePostsUrl: function () {
-    return "http://reddit.com/r/all.json?jsonp=?&limit=100&after=" + this.after;
+    return "http://reddit.com/r/all.json?jsonp=?&limit=15&after=" + this.after;
   },
 
   after: "",

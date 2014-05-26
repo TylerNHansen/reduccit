@@ -1,3 +1,10 @@
-<div class="post">
-  <a href="<%= post.get('url') %>"><%= post.get('title') %></a>
+<div class="post panel panel-default">
+  <div class="media">
+    <a class="pull-left" href="<%= post.get('url') %>">
+      <img class="media-object" src="<%= post.get('imageURL') %>">
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><a href="<%= post.get('permalink') %>"><%= post.get('title') %></a></h4>
+    </div>
+  </div>
 </div>
