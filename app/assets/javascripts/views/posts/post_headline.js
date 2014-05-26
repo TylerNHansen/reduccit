@@ -10,6 +10,10 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
   render: function () {
     var content = this.template({post: this.model});
     this.$el.html(content);
+    if(this.showTopComment){
+      this.topCommentView.render();
+      this.$el.find('.media-body').append(_(this.topCommentView.$el.html()).unescape());
+    }
     return this;
   },
 
@@ -21,15 +25,17 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
   toggleTopComment: function (event) {
     // only load the top comment once
     if(!this.topComment){
+      this.showTopComment = true;
       // render/loading strategy:
       // make a comment model with the URL for grabbing the json
       this.topComment = new Redditclone.Models.Comment({url: this.model.get('topCommentJson')})
       // make a view to handle displaying a comment
       this.topCommentView = new Redditclone.Views.CommentShow({model: this.topComment});
       // wait for fetch to finish firing, then add in the top comment rendering
-      this.listenToOnce(this.topComment, 'sync', this.renderTopComment);
+      this.listenToOnce(this.topComment, 'sync', this.render);
       this.topComment.fetch();
     } else {
+      this.showTopComment = !this.showTopComment
       this.render();
     }
   },
