@@ -6,7 +6,7 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
       that.checkScroll(event);
     });
     this.loading = false;
-    this.listenTo(this.collection, 'sync add remove change reset', this.render);
+    this.listenTo(this.collection, 'sync', this.render);
   },
 
   template: JST['posts/index'],
@@ -16,7 +16,10 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     'scroll .content': 'checkScroll'
   },
 
+  renderCount: 0,
+
   render: function () {
+    console.log(this.renderCount++);
     var content = "<div class=\"posts\">"
     // _(this.collection.last(100)).each(function (post) {
     // above breaks scrolling

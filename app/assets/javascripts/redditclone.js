@@ -12,7 +12,7 @@ window.Redditclone = {
     // this.reddit_pw = "<%= ENV['REDDIT_PW'] %>"
 
     this.$rootEl = $('#content');
-    Redditclone.posts = new Redditclone.Collections.Posts;
+    Redditclone.posts = new Redditclone.Collections.Posts();
     Redditclone.router = new Redditclone.Routers.Posts({$rootEl: this.$rootEl});
     Backbone.history.start();
   }
