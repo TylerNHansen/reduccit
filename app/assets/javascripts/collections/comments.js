@@ -1,22 +1,44 @@
  Redditclone.Collections.Comments = Backbone.Collection.extend({
 
-  model: Redditclone.Models.Comment,
+   initialize: function (options) {
+     if(options && options.url) {
+       this.url = options.url
+     } else {
+       this.url = "http://www.reddit.com/r/ftlgame/comments/26lqp2/about_death_rays/.json"
+     }
+   },
 
-  url: "/api/reddit/test",
+  model: Redditclone.Models.Comment,
 
   sync: function(method, model, options) {
     options.dataType = 'jsonp';
+    options.url = this.url
     return Backbone.sync.apply(this, arguments);
   },
 
   parse: function (resp) {
-    var children = [];
-    if(resp.data.children){
-      _(resp.data.children).each(function (childData) {
-        children.push(new Redditclone.Models.Comment(childData, {parse: true}));
-      })
-      delete resp.data.children
+
+    function _parse(resp) {
+      var children = [];
+      var that = this
+      function parseChunk(chunk) {
+        switch (chunk.kind) {
+        case "Listing":
+          return _parse(chunk.data.children);
+          break;
+        case "t1": // t1 is comments
+          return [new Redditclone.Models.Comment(chunk, {parse: true})];
+          break;
+        default:
+          break;
+        }
+      }
+      while(resp.length){
+        children.push.apply(children, (parseChunk(resp.pop())));
+      }
+      return children;
     }
-    return children;
+
+    return _parse(resp);
   },
 });

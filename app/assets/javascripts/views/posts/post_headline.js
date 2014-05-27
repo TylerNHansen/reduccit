@@ -2,7 +2,8 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
 
 
   events: {
-    "click .btn" : "toggleTopComment"
+    "click .top-comment" : "toggleTopComment",
+    "click .all-comments" : "toggleAllComments"
   },
 
   template: JST['posts/headline'],
@@ -13,6 +14,10 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
     if(this.showTopComment){
       this.topCommentView.render();
       this.$el.find('.media-body').append(_(this.topCommentView.$el.html()).unescape());
+    }
+    if (this.showAllComments) {
+      this.allCommentsView.render();
+      this.$el.find('.media-body').append(_(this.allCommentsView.$el.html()).unescape());
     }
     return this;
   },
@@ -28,14 +33,29 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
       this.showTopComment = true;
       // render/loading strategy:
       // make a comment model with the URL for grabbing the json
-      this.topComment = new Redditclone.Models.Comment({url: this.model.get('topCommentJson')})
+      this.topComment = new Redditclone.Collections.Comments({url: this.model.get('topCommentJson')})
       // make a view to handle displaying a comment
-      this.topCommentView = new Redditclone.Views.CommentShow({model: this.topComment});
+      this.topCommentView = new Redditclone.Views.CommentsIndex({collection: this.topComment});
       // wait for fetch to finish firing, then add in the top comment rendering
       this.listenToOnce(this.topComment, 'sync', this.render);
       this.topComment.fetch();
     } else {
       this.showTopComment = !this.showTopComment
+      this.render();
+    }
+  },
+
+  toggleAllComments: function (allComments) {
+    if(!this.allComments){
+      this.showAllComments = true;
+      this.allComments = new Redditclone.Collections.Comments({url: this.model.get('allCommentsJson')})
+      // make a view to handle displaying a comment
+      this.allCommentsView = new Redditclone.Views.CommentsIndex({collection: this.allComments});
+      // wait for fetch to finish firing, then add in the top comment rendering
+      this.listenToOnce(this.allComments, 'sync', this.render);
+      this.allComments.fetch();
+    } else {
+      this.showAllComments = !this.showAllComments
       this.render();
     }
   },
