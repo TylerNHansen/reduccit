@@ -1,10 +1,10 @@
 <div class="post panel panel-default">
   <div class="media">
-    <a class="pull-left" href="<%= post.get('url') %>">
+    <a class="pull-left" href="<%= post.get('url') %>" target="_blank">
       <img class="media-object" src="<%= post.get('imageURL') %>">
     </a>
     <div class="media-body">
-      <h4 class="media-heading"><a href="<%= post.get('permalink') %>"><%= post.get('title') %></a></h4>
+      <h4 class="media-heading"><a href="<%= post.get('permalink') %>" target="_blank"><%= post.get('title') %></a></h4>
       <button class="btn btn-default">Top Comment</button>
     </div>
   </div>
