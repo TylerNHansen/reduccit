@@ -16,7 +16,6 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
       this.$el.find('.media-body').append(this.topCommentView.$el);
     }
     if (this.showAllComments) {
-      debugger
       this.allCommentsView.render();
       this.$el.find('.media-body').append(this.allCommentsView.$el);
     }
@@ -56,12 +55,7 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
       // wait for fetch to finish firing, then add in the top comment rendering
       this.listenToOnce(this.allComments, 'sync', this.render);
       var that = this;
-      this.allComments.fetch({
-        success: function () {
-          console.log(that);
-          debugger;
-        }
-      });
+      this.allComments.fetch();
     } else {
       this.showAllComments = !this.showAllComments
       this.render();
