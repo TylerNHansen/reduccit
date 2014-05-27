@@ -22,3 +22,29 @@ class TestController < ApplicationController
 
 
 end
+
+
+class Reddit
+  include HTTParty
+  format :json
+  base_uri 'https://ssl.reddit.com'
+  PW = ENV['REDDIT_PASSWORD']
+  USER = ENV['REDDIT_USER_NAME']
+
+  attr_reader :cookie
+
+  def self.login
+    resp = post('/api/login', {
+      :headers => {
+        "User-Agent" => "ThrustVectoring's Test Script"
+      },
+      :body => {
+        user: USER,
+        passwd: PW,
+        api_type: 'json'
+      }})
+      # resp.headers["set-cookie"]
+      # yields the cookie for sending logged-in requests
+  end
+
+end

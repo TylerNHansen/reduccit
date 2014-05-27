@@ -6,9 +6,22 @@ Redditclone.Routers.Posts = Backbone.Router.extend({
 
   routes: {
     '': "index",
+    ':sub': "subreddit",
   },
 
   index: function () {
+    Redditclone.posts = new Redditclone.Collections.Posts();
+    var indexView = new Redditclone.Views.PostsIndex({
+      collection: Redditclone.posts
+    })
+    Redditclone.posts.fetch();
+    this._swapView(indexView);
+  },
+
+  subreddit: function (sub) {
+    Redditclone.posts = new Redditclone.Collections.Posts({
+      subreddit: sub
+    });
     var indexView = new Redditclone.Views.PostsIndex({
       collection: Redditclone.posts
     })

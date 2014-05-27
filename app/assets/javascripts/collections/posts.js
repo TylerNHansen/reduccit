@@ -1,8 +1,15 @@
  Redditclone.Collections.Posts = Backbone.Collection.extend({
 
-  model: Redditclone.Models.Post,
 
-  url: "/api/reddit/test",
+   initialize: function (options) {
+     if(options){
+       this.subreddit = options.subreddit || "all"
+     } else {
+       this.subreddit = "all"
+     }
+   },
+
+  model: Redditclone.Models.Post,
 
   sync: function(method, model, options) {
     options.dataType = 'jsonp';
@@ -12,10 +19,14 @@
   },
 
   morePostsUrl: function () {
-    return "http://reddit.com/r/all.json?jsonp=?&limit=15&after=" + this.after;
+    return this.urlBase + this.subreddit + this.urlOptions + this.after;
   },
 
   after: "",
+
+  urlBase: "http://reddit.com/r/",
+  urlOptions: ".json?jsonp=?&limit=15&after=",
+
 
   parse: function (resp) {
     if(resp.data.after){
