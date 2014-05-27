@@ -5,9 +5,13 @@ Redditclone.Models.Comment = Backbone.Model.extend({
     return Backbone.sync.apply(this, arguments);
   },
 
+
+
   parse: function (resp) {
-    commentData = _(resp.data).pick('body_html');
-    commentData.replies = new Redditclone.Collections.Comments(resp.data.replies, {parse: true})
+    var commentData = _(resp.data).pick('body_html');
+    if (resp.data.replies) {
+      commentData.replies = new Redditclone.Collections.Comments(resp.data.replies, {parse:true});
+    }
     return commentData;
   },
 

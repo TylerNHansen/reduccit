@@ -7,7 +7,6 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
   template: JST['comments/comment'],
 
   render: function () {
-    debugger
     var content = this.template({comment: this.model});
     this.$el.html(content);
 
