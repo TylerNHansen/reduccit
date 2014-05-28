@@ -14,37 +14,17 @@ class TestController < ApplicationController
     render json: results
   end
 
+  # client = RedditKit::Client.new(Figaro.env.REDDIT_USER_NAME, Figaro.env.REDDIT_PASSWORD)
+
+  # client.signed_in?
+
+  # client.submit('title text', 'subreddit name', url: 'http://submission url')
+
   private
 
   def parse_post
 
   end
 
-
-end
-
-
-class Reddit
-  include HTTParty
-  format :json
-  base_uri 'https://ssl.reddit.com'
-  PW = ENV['REDDIT_PASSWORD']
-  USER = ENV['REDDIT_USER_NAME']
-
-  attr_reader :cookie
-
-  def self.login
-    resp = post('/api/login', {
-      :headers => {
-        "User-Agent" => "ThrustVectoring's Test Script"
-      },
-      :body => {
-        user: USER,
-        passwd: PW,
-        api_type: 'json'
-      }})
-      # resp.headers["set-cookie"]
-      # yields the cookie for sending logged-in requests
-  end
 
 end

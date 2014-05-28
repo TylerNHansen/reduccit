@@ -17,7 +17,10 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'backbone-on-rails'
 gem 'figaro'
+
+# Convenience gems for interacting with Reddit
 gem 'httparty'
+gem 'redditkit', '~> 1.0.1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

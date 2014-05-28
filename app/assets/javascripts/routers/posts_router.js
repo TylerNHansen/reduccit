@@ -5,8 +5,9 @@ Redditclone.Routers.Posts = Backbone.Router.extend({
   },
 
   routes: {
-    '': "index",
-    ':sub': "subreddit",
+    '': 'index',
+    'new': 'postForm',
+    ':sub': 'subreddit',
   },
 
   index: function () {
@@ -27,6 +28,11 @@ Redditclone.Routers.Posts = Backbone.Router.extend({
     })
     Redditclone.posts.fetch();
     this._swapView(indexView);
+  },
+
+  postForm: function () {
+    var newView = new Redditclone.Views.PostNew({});
+    this._swapView(newView);
   },
 
   _swapView: function (newView) {
