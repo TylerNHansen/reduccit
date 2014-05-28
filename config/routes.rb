@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'application#splash'
 
   get 'api/reddit/test' => 'test#test'
+  post 'api/reddit/post' => 'reddit#create'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -14,12 +14,6 @@ class TestController < ApplicationController
     render json: results
   end
 
-  # client = RedditKit::Client.new(Figaro.env.REDDIT_USER_NAME, Figaro.env.REDDIT_PASSWORD)
-
-  # client.signed_in?
-
-  # client.submit('title text', 'subreddit name', url: 'http://submission url')
-
   private
 
   def parse_post
