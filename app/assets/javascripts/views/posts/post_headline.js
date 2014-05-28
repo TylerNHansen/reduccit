@@ -37,6 +37,8 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
       });
     } else {
       this[attrName + "View"].$el.toggleClass('hidden');
+      this[attrName + "View"].$el.find('.comment').toggleClass('hidden', false);
+
     }
   },
 
