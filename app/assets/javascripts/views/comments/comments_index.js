@@ -8,15 +8,12 @@ Redditclone.Views.CommentsIndex = Backbone.View.extend({
   headline: JST['posts/headline'],
 
   render: function () {
-    var content = this.template({
-      comments: this.collection,
-    });
-    var comments = [];
-    this.$el.html(content);
+    this.$el.addClass('comments');
     var that = this;
+    var commentViews = [];
     this.collection.each(function (comment){
       var commentView = new Redditclone.Views.CommentShow({model: comment});
-      comments.push(commentView);
+      commentViews.push(commentView);
       that.$el.append(commentView.render().$el);
     });
 

@@ -11,55 +11,41 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
   render: function () {
     var content = this.template({post: this.model});
     this.$el.html(content);
-    if(this.showTopComment){
-      this.topCommentView.render();
-      this.$el.find('.media-body').append(this.topCommentView.$el);
-    }
-    if (this.showAllComments) {
-      this.allCommentsView.render();
-      this.$el.find('.media-body').append(this.allCommentsView.$el);
-    }
     return this;
   },
 
-  renderTopComment: function () {
-    this.topCommentView.render();
-    this.$el.find('.media-body').append(_(this.topCommentView.$el.html()).unescape());
+  appendComments: function (subview) {
+    this.$el.find('.media-body').append(subview.$el);
+  },
+
+  toggleComments: function (source, attrName) {
+    // load if not present
+    if(!this.model[attrName]){
+      // maybe delegate this to a helper method inside the post model
+      // I'm reaching into this.model twice
+      this.model[attrName] = new Redditclone.Collections.Comments([], {url: this.model.get(source)});
+
+      this[attrName + "View"] = new Redditclone.Views.CommentsIndex({collection: this.model[attrName]});
+
+      var that = this;
+
+      // shove comments in once we have them
+      this.model[attrName].fetch(
+        {success: function () {
+          that.appendComments(that[attrName + "View"]);
+        }
+      });
+    } else {
+      this[attrName + "View"].$el.toggleClass('hidden');
+    }
   },
 
   toggleTopComment: function (event) {
-    // only load the top comment once
-    if(!this.topComment){
-      this.showTopComment = true;
-      // render/loading strategy:
-      // make a comment model with the URL for grabbing the json
-      this.topComment = new Redditclone.Collections.Comments([], {url: this.model.get('topCommentJson')})
-      // make a view to handle displaying a comment
-      this.topCommentView = new Redditclone.Views.CommentsIndex({collection: this.topComment});
-      // wait for fetch to finish firing, then add in the top comment rendering
-      this.listenToOnce(this.topComment, 'sync', this.render);
-      this.topComment.fetch();
-    } else {
-      this.showTopComment = !this.showTopComment
-      this.render();
-    }
+    this.toggleComments('topCommentJson', 'topComment');
   },
 
-  toggleAllComments: function (allComments) {
-
-    if(!this.allComments){
-      this.showAllComments = true;
-      this.allComments = new Redditclone.Collections.Comments([], {url: this.model.get('allCommentsJson')})
-      // make a view to handle displaying a comment
-      this.allCommentsView = new Redditclone.Views.CommentsIndex({collection: this.allComments});
-      // wait for fetch to finish firing, then add in the top comment rendering
-      this.listenToOnce(this.allComments, 'sync', this.render);
-      var that = this;
-      this.allComments.fetch();
-    } else {
-      this.showAllComments = !this.showAllComments
-      this.render();
-    }
+  toggleAllComments: function (event) {
+    this.toggleComments('allCommentsJson', 'allComments');
   },
 
 });

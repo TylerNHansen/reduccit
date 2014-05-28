@@ -10,6 +10,7 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
     var that = this
     var content = this.template({comment: this.model});
     this.$el.html(content);
+    this.$el.addClass("comment panel panel-default")
     if(!this.model.get('replies')) return this;
     this.model.get('replies').each(function (comment) {
       replyView = new Redditclone.Views.CommentShow({model: comment});
