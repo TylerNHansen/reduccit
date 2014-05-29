@@ -5,12 +5,19 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
   },
 
   events: {
-    "click" : "hideSelf"
+    "click" : "hideChildren",
+    "click .panel" : "noProp"
   },
 
-  hideSelf: function (event) {
+  noProp: function (event) {
     event.stopPropagation();
-    this.$el.toggleClass('hidden', true);
+  },
+
+  hideChildren: function (event) {
+    // work in progress, also think I need .comments divs to nest properly
+    event.stopPropagation();
+    this.$el.find('.md').toggleClass('hidden');
+    this.$el.find('.comments').toggleClass('hidden');
   },
 
   template: JST['comments/comment'],
@@ -20,9 +27,10 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
     var content = this.template({comment: this.model});
     this.$el.html(content);
     this.$el.addClass("comment");
+    debugger
     if(!this.model.get('replies')) return this;
     this.replyViews = new Redditclone.Views.CommentsIndex({ collection: this.model.get('replies') })
-    this.$el.append(this.replyViews.render().$el)
+    this.$el.children().append(this.replyViews.render().$el)
     return this;
   },
 
