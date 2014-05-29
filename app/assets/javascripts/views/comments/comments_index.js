@@ -4,7 +4,7 @@ Redditclone.Views.CommentsIndex = Backbone.View.extend({
     this.listenTo(this.collection, 'sync', this.render);
   },
 
-  template: JST['comments/index'],
+  // template: JST['comments/index'],
   headline: JST['posts/headline'],
 
   render: function () {

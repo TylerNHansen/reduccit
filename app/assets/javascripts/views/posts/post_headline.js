@@ -10,6 +10,7 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
 
   render: function () {
     var content = this.template({post: this.model});
+    this.$el.toggleClass('post', true);
     this.$el.html(content);
     return this;
   },

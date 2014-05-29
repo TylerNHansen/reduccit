@@ -21,9 +21,11 @@
     if (_(resp).isArray()) {
       return this.parse(resp[1]);
     }
-
-    return _(resp.data.children).map(function (child) {
-      return new Redditclone.Models.Comment(child, { parse: true });
+    var temp = _(resp.data.children).map(function (child) {
+      if (child.kind === 't1') {
+        return new Redditclone.Models.Comment(child, { parse: true });
+      }
     });
+    return _.compact(temp);
   },
 });

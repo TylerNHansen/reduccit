@@ -10,19 +10,16 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     this.listenTo(this.collection, 'sync', this.renderNewHeadlines);
   },
 
-  template: JST['posts/index'],
+  // template: JST['posts/index'],
   headline: JST['posts/headline'],
 
   events: {
     'scroll .content': 'checkScroll'
   },
 
-  renderCount: 0,
-
   render: function () {
-    var content = this.template();
     this.headlines = [];
-    this.$el.html(content);
+    this.$el.toggleClass('posts', true);
     this.renderNewHeadlines();
 
     return this;
