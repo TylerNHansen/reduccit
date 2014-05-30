@@ -27,7 +27,12 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
     var content = this.template({comment: this.model});
     this.$el.html(content);
     this.$el.addClass("comment");
-    debugger
+    // var links = this.$el.find('a[href]');
+    // debugger
+    // links.each( function (index, link) {
+    //   console.log(link);
+    //   debugger;
+    // });
     if(!this.model.get('replies')) return this;
     this.replyViews = new Redditclone.Views.CommentsIndex({ collection: this.model.get('replies') })
     this.$el.children().append(this.replyViews.render().$el)

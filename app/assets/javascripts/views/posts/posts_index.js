@@ -8,20 +8,31 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     this.loading = false;
     Redditclone.postsIndex = this;
     this.listenTo(this.collection, 'sync', this.renderNewHeadlines);
+    $("body").popover({
+      content: function() {return that.imgTag(this.href)},
+      trigger: 'hover',
+      selector: ".posts a[href]",
+      html: 'true'
+     });
   },
 
   // template: JST['posts/index'],
   headline: JST['posts/headline'],
+  preview: JST['preview'],
 
   events: {
-    'scroll .content': 'checkScroll'
+    'scroll .content': 'checkScroll',
+    // 'mouseover a': 'test'
+  },
+
+  imgTag: function (url) {
+    return '<img src="' + url + '" height=200 />';
   },
 
   render: function () {
     this.headlines = [];
     this.$el.toggleClass('posts', true);
     this.renderNewHeadlines();
-
     return this;
   },
 

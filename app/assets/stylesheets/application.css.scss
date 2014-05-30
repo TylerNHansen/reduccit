@@ -24,3 +24,9 @@
 {
   background-color: #C0C0C0;
 }
+
+a:hover + .box,.box:hover{
+    display: block;
+    position: relative;
+    z-index: 100;
+}
