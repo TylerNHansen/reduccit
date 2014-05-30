@@ -27,7 +27,11 @@ Redditclone.Views.PostNew = Backbone.View.extend({
   },
 
   postToReddit: function (imgurData, title) {
-    $.post("/api/reddit/post?url=" + imgurData.data.link + "&subreddit=anonyreddit&title=" + title);
+    $.post("/api/reddit/post?url=" + imgurData.data.link + "&subreddit=anonyreddit&title=" + title,
+    function(){
+      Redditclone.router.navigate('/#anonyreddit', true);
+    }
+  );
   },
 
   // posts the file to imgur using my app's public auth string,

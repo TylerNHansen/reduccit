@@ -11,8 +11,15 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     $("body").popover({
       content: function() {return that.imgTag(this.href)},
       trigger: 'hover',
-      selector: ".posts a[href]",
-      html: 'true'
+      selector: '.posts a[href]',
+      html: 'true',
+      placement: function () {
+        // mysteriously closes over the triggering var 'event'
+        var screenPos = event.target.offsetTop - event.currentTarget.scrollTop;
+        var halfPos = window.innerHeight / 2;
+        return (screenPos > halfPos) ? "top" : "bottom";
+      },
+      container: "body",
      });
   },
 
@@ -22,11 +29,11 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
 
   events: {
     'scroll .content': 'checkScroll',
-    // 'mouseover a': 'test'
   },
 
   imgTag: function (url) {
-    return '<img src="' + url + '" height=200 />';
+    url += url.match(/imgur/) ? ".jpg" : "";
+    return '<img src="http://src4.sencha.io/500/500/' + url + '" />';
   },
 
   render: function () {
@@ -37,6 +44,8 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
   },
 
   renderNewHeadlines: function () {
+    // TODO: fix parsing posts
+    if(this.collection.first().get('subreddit')) return undefined;
     var toDraw = this.collection.reject(function(post){return post.get('rendered')});
     var that = this;
     _(toDraw).each(function (post) {

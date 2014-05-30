@@ -11,7 +11,7 @@ Redditclone.Models.Post = Backbone.Model.extend({
   },
 
   imageURL: function (url, domain) {
-    var senchaFragment = "http://src.sencha.io/200/"
+    var senchaFragment = "http://src" + this.shardNum() + ".sencha.io/200/";
     if (/\.(jpg|gif|png)$/.test(url)) {
       return senchaFragment + url;
     } else if(domain === 'imgur.com'){
@@ -21,4 +21,14 @@ Redditclone.Models.Post = Backbone.Model.extend({
     }
 
   },
+
+  // shards 1, 2, and 3 for loading thumbnails
+  // shard 4 is reserved for popovers
+  shardNum: (function() {
+    var num = 1;
+    return function () {
+      num = (num % 3) + 1;
+      return num;
+    }
+  }())
 });

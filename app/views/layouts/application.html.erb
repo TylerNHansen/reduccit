@@ -8,6 +8,16 @@
 </head>
 <body>
 
+
+<script>
+$('#sub-nav').on('click', function (event) {
+  event.preventDefault();
+  Redditclone.router.navigate('#' + $('#sub-input').val(), true);
+})
+</script>
+
+<%= yield %>
+
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -42,15 +52,6 @@
         </center>
     </div>
 </div>
-
-<script>
-$('#sub-nav').on('click', function (event) {
-  event.preventDefault();
-  Redditclone.router.navigate('#' + $('#sub-input').val(), true);
-})
-</script>
-
-<%= yield %>
 
 <div id="content"></div>
 
