@@ -2,7 +2,7 @@ Redditclone.Models.Post = Backbone.Model.extend({
   // no URL attribute for grabbing a particular post
 
   parse: function (resp) {
-    var postData = _(resp.data).pick('url', 'title', 'domain');
+    var postData = _(resp.data).pick('url', 'title', 'domain', 'over_18');
     postData.imageURL = this.imageURL(postData.url, postData.domain);
     postData.permalink = "http://reddit.com" + resp.data.permalink;
     postData.topCommentJson = postData.permalink + ".json?jsonp=?&sort=top&limit=1";

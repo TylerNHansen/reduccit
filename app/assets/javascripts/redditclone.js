@@ -8,6 +8,7 @@ window.Redditclone = {
     this.$rootEl = $('#content');
     Redditclone.router = new Redditclone.Routers.Posts({$rootEl: this.$rootEl});
     Backbone.history.start();
+    this.over18 = false;
   }
 };
 

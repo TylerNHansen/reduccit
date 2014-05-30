@@ -11,6 +11,11 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
   render: function () {
     var content = this.template({post: this.model});
     this.$el.toggleClass('post', true);
+    if(this.model.get('over_18')){
+      console.log(this.model.get('over_18'));
+      this.$el.toggleClass('nsfw', true);
+      this.$el.toggleClass('nsfw-hidden', !Redditclone.over18)
+    }
     this.$el.html(content);
     return this;
   },

@@ -21,6 +21,10 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
       },
       container: "body",
      });
+     $("#over_18").change(function () {
+       $('.nsfw').toggleClass('nsfw-hidden', !this.checked);
+       Redditclone.over18 = this.checked;
+     })
   },
 
   // template: JST['posts/index'],
@@ -45,7 +49,7 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
 
   renderNewHeadlines: function () {
     // TODO: fix parsing posts
-    if(this.collection.first().get('subreddit')) return undefined;
+    if(!this.collection.first() || this.collection.first().get('subreddit')) return undefined;
     var toDraw = this.collection.reject(function(post){return post.get('rendered')});
     var that = this;
     _(toDraw).each(function (post) {
