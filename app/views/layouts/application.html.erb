@@ -9,12 +9,7 @@
 <body>
 
 
-<script>
-$('#sub-nav').on('click', function (event) {
-  event.preventDefault();
-  Redditclone.router.navigate('#' + $('#sub-input').val(), true);
-})
-</script>
+
 
 <%= yield %>
 
@@ -55,6 +50,13 @@ $('#sub-nav').on('click', function (event) {
         </center>
     </div>
 </div>
+
+<script>
+$('#sub-nav').on('click', function (event) {
+  event.preventDefault();
+  Redditclone.router.navigate('#' + $('#sub-input').val(), true);
+})
+</script>
 
 <div id="content"></div>
 
