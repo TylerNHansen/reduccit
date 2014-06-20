@@ -33,7 +33,7 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
         }
       });
     } else {
-      this.$el.find('.modal').modal();
+      this.$el.find('.top-comment-modal').modal();
     }
   },
 
