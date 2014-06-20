@@ -5,8 +5,9 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
   },
 
   events: {
+    "click .comment-content" : "noProp",
     "click" : "hideChildren",
-    "click .panel" : "noProp"
+    "click .expandable" : "showChildren",
   },
 
   noProp: function (event) {
@@ -14,10 +15,18 @@ Redditclone.Views.CommentShow = Backbone.View.extend({
   },
 
   hideChildren: function (event) {
-    // work in progress, also think I need .comments divs to nest properly
+    this.toggleVisible(event, true);
+  },
+
+  showChildren: function (event) {
+    this.toggleVisible(event, false);
+  },
+
+  toggleVisible: function (event, hide) {
     event.stopPropagation();
     this.$el.find('.md').toggleClass('hidden');
     this.$el.find('.comments').toggleClass('hidden');
+    this.$el.find('.comment-content').toggleClass('expandable');
   },
 
   template: JST['comments/comment'],

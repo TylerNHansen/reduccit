@@ -2,11 +2,12 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
 
 
   events: {
-    "click .top-comment" : "toggleTopComment",
+    "click .top-comment" : "topCommentModal",
     "click .all-comments" : "toggleAllComments"
   },
 
   template: JST['posts/headline'],
+  commentTemplate: JST['comments/comment'],
 
   render: function () {
     var content = this.template({post: this.model});
@@ -18,6 +19,22 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
     }
     this.$el.html(content);
     return this;
+  },
+
+  topCommentModal: function (event) {
+    if(!this.model.topComment){
+      var that = this;
+      this.model.topComment = new Redditclone.Collections.Comments([], {url: this.model.get('topCommentJson')});
+      this.model.topComment.fetch({
+        success: function () {
+          var content = that.commentTemplate({comment: that.model.topComment.first()});
+          that.$el.find('.modal-body').html(content);
+          that.topCommentModal();
+        }
+      });
+    } else {
+      this.$el.find('.modal').modal();
+    }
   },
 
   appendComments: function (subview) {
@@ -36,8 +53,8 @@ Redditclone.Views.PostHeadline = Backbone.View.extend({
       var that = this;
 
       // shove comments in once we have them
-      this.model[attrName].fetch(
-        {success: function () {
+      this.model[attrName].fetch({
+        success: function () {
           that.appendComments(that[attrName + "View"]);
         }
       });

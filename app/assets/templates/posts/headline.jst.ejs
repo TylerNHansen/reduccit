@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+
   <div class="media">
     <a class="pull-left" href="<%= post.get('url') %>" target="_blank">
       <img class="media-object" src="<%= post.get('imageURL') %>">
@@ -7,6 +7,19 @@
       <h4 class="media-heading"><a href="<%= post.get('url') %>" target="_blank"><%= post.get('title') %></a></h4>
       <button class="btn btn-default top-comment">Top Comment</button>
       <button class="btn btn-default all-comments">All Comments</button>
+    </div>
+  </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Top Comment</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
     </div>
   </div>
 </div>

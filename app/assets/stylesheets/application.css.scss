@@ -15,21 +15,42 @@
  */
 
 @import "bootstrap";
+
 .comment
 {
   padding-left: 15px;
-  background-color: #B8B8B8;
+  min-height: 10px;
+  border: 1px solid;
+  margin: 4px;
 }
-.comment .panel
+.comment .md
 {
-  background-color: #C0C0C0;
 }
 
-.popover{
+.comment-content
+{
+//  border: 1px solid;
+  margin: 4px;
+  min-height: 10px;
+}
+
+.expandable
+{
+  background-color: green;
+}
+
+.popover {
   max-width: 550px;
 }
 
-body { padding-top: 50px; }
+body {
+  padding-top: 50px;
+}
+
+.post {
+  padding-top: 15px;
+  padding-left: 15px;
+}
 
 .nsfw-hidden{
   display: none;

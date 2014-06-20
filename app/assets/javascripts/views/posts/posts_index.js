@@ -11,23 +11,21 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     $("body").popover({
       content: function() {return that.imgTag(this.href)},
       trigger: 'hover',
-      selector: '.posts a[href]',
+      selector: "a[href]",
       html: 'true',
       placement: function () {
-        // mysteriously closes over the triggering var 'event'
         var screenPos = event.target.offsetTop - event.currentTarget.scrollTop;
         var halfPos = window.innerHeight / 2;
         return (screenPos > halfPos) ? "top" : "bottom";
       },
       container: "body",
      });
+
      $("#over_18").change(function () {
        $('.nsfw').toggleClass('nsfw-hidden', !this.checked);
        Redditclone.over18 = this.checked;
      })
   },
-
-  // template: JST['posts/index'],
   headline: JST['posts/headline'],
   preview: JST['preview'],
 
@@ -36,8 +34,14 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
   },
 
   imgTag: function (url) {
+    if (url.match(/.gif$/)){
+      return '<img src="' + url + '" />'
+    }
     url += url.match(/imgur/) ? ".jpg" : "";
+    if (url.match(/(\.jpg|\.png)$/)) {
     return '<img src="http://src4.sencha.io/500/500/' + url + '" />';
+    }
+    return 'No Preview Available'
   },
 
   render: function () {
