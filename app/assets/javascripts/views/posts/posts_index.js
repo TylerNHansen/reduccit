@@ -8,7 +8,7 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     this.loading = false;
     Redditclone.postsIndex = this;
     this.listenTo(this.collection, 'sync', this.renderNewHeadlines);
-    $("body").popover({
+    $("#content").popover({
       content: function() {return that.imgTag(this.href)},
       trigger: 'hover',
       selector: "a[href]",
