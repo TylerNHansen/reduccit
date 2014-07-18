@@ -1,3 +1,0 @@
-== README
-
-reduccit - A lightweight reddit front-end. Backbone app consuming third-party RESTful APIs. Overrides Backbone's parse methods to recursively consume comments and their nested replies. JSONP requests with AJAX, infinite scroll, preview image links on mouseover.
