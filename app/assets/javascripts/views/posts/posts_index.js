@@ -49,7 +49,16 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     this.$el.toggleClass('posts', true);
     this.renderNewHeadlines();
     $('li.active').toggleClass('active', false);
-    $('li.sub-title.' + this.collection.subreddit.toLowerCase()).toggleClass('active', true);
+    // check if we're navigating to an existing title
+    var $targetSub = $('li.sub-title.' + this.collection.subreddit.toLowerCase());
+    if($targetSub.size() === 1){
+      $targetSub.toggleClass('active', true);
+    } else {
+      var subName = this.collection.subreddit.toLowerCase();
+      var subTitleHtml = '<li class="active sub-title ' + subName + '"><a href="#' + subName + '">' + subName + '</a></li>';
+      $('ul.nav.navbar-nav').prepend(subTitleHtml);
+    }
+
     return this;
   },
 
