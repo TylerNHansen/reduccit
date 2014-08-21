@@ -48,8 +48,8 @@ Redditclone.Views.PostsIndex = Backbone.View.extend({
     this.headlines = [];
     this.$el.toggleClass('posts', true);
     this.renderNewHeadlines();
-    $('.active').toggleClass('active', false);
-    $('.sub-title .' + this.collection.subreddit).toggleClass('active', true);
+    $('li.active').toggleClass('active', false);
+    $('li.sub-title.' + this.collection.subreddit.toLowerCase()).toggleClass('active', true);
     return this;
   },
 
